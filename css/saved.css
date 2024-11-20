@@ -1,0 +1,107 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+}
+
+/* Saved Schedules Page Styles */
+.calendar-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Horizontal Calendar */
+  .calendar-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .day-container {
+    width: 13%; /* Leave space for 7 days */
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .day-container h3 {
+    font-size: 16px;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  .class-list {
+    width: 100%;
+    text-align: left;
+  }
+  
+  .class-item {
+    background-color: #e9ecef;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 12px;
+  }
+  
+  .class-item strong {
+    display: block;
+    color: #333;
+  }
+  
+  .class-item p {
+    margin: 0;
+    color: #555;
+  }
+  
+  /* Back to Home Button */
+.home-btn {
+    text-align: center;
+    margin-top: 20px; 
+}
+  
+button {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+button:hover {
+    background-color: #0056b3;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
