@@ -125,3 +125,104 @@
     height: 100px;
     width: 324px;
 }
+
+.saved-container {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.saved-container h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.saved-schedules ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.saved-schedules ul li {
+  background: #f9f9f9;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.saved-schedules ul li h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #007bff;
+}
+
+.saved-schedules ul li p {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.delete-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.delete-btn:hover {
+  background-color: #cc0000;
+  transform: scale(1.05);
+}
+
+/* Basic layout for the calendar */
+.calendar-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 15px;
+  margin-top: 20px;
+}
+
+/* Styling for each day container */
+.day-container {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Styling for each class item */
+.class-list {
+  margin-top: 10px;
+}
+
+.class-item {
+  background-color: #e0e0e0;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+}
+
+.class-item strong {
+  display: block;
+  font-size: 1.1em;
+}
+
+.class-item p {
+  margin: 5px 0;
+}

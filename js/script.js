@@ -10,4 +10,10 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     } else {
         errorMessage.textContent = "Invalid username or password. Please try again.";
     }
+
+    
+});
+
+window.addEventListener("beforeunload", function() {
+    localStorage.clear();  // Clears all items from localStorage
 });
