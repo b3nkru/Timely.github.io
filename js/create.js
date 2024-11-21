@@ -11,16 +11,43 @@ document.getElementById("scheduleForm").addEventListener("submit", function (eve
   const startTime = document.getElementById("startTime").value;
   const endTime = document.getElementById("endTime").value;
 
-  // Validate input (optional but recommended)
+  // Validate input
   if (!scheduleName || !daysOfWeek || !startTime || !endTime) {
     alert("Please fill out all fields!");
     return;
   }
 
-  // Add the new schedule with multiple classes for specific days
+  // Convert times to comparable values
+  const start = parseTime(startTime);
+  const end = parseTime(endTime);
+
+  if (start >= end) {
+    alert("Start time must be before end time!");
+    return;
+  }
+
+  // Check for overlapping schedules
+  for (const day of daysOfWeek) {
+    const existingSchedulesForDay = schedules.filter(schedule => schedule.daysOfWeek.includes(day));
+    for (const existingSchedule of existingSchedulesForDay) {
+      const existingStart = parseTime(existingSchedule.startTime);
+      const existingEnd = parseTime(existingSchedule.endTime);
+
+      if (
+        (start >= existingStart && start < existingEnd) || // Start overlaps
+        (end > existingStart && end <= existingEnd) || // End overlaps
+        (start <= existingStart && end >= existingEnd) // Full overlap
+      ) {
+        alert(`Conflict detected: ${scheduleName} overlaps with ${existingSchedule.name} on ${day}.`);
+        return;
+      }
+    }
+  }
+
+  // Add the new schedule
   const newSchedule = {
     name: scheduleName,
-    daysOfWeek: daysOfWeek,  // Days the course occurs
+    daysOfWeek: daysOfWeek, // Days the course occurs
     startTime: startTime,
     endTime: endTime,
   };
@@ -39,3 +66,9 @@ document.getElementById("scheduleForm").addEventListener("submit", function (eve
   alert("Schedule saved successfully!");
   location.href = "saved.html";
 });
+
+// Helper function to convert "HH:MM" to minutes since midnight
+function parseTime(time) {
+  const [hours, minutes] = time.split(":").map(Number);
+  return hours * 60 + minutes;
+}

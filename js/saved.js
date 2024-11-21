@@ -1,46 +1,30 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const calendarContainer = document.getElementById("calendarContainer");
+// Retrieve existing schedules from localStorage or initialize an empty array
+const schedules = JSON.parse(localStorage.getItem("schedules")) || [];
+const calendarContainer = document.getElementById("calendarContainer");
 
-  if (!calendarContainer) {
-    console.error("Calendar container not found.");
-    return;
-  }
-
-  // Retrieve schedules from localStorage
-  const savedSchedules = JSON.parse(localStorage.getItem("schedules")) || [];
-
-  // Days of the week
+// Function to display schedules in a calendar view
+function displaySchedules() {
   const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  
+  // Clear previous calendar
+  calendarContainer.innerHTML = "";
 
   // Create the calendar structure
-  daysOfWeek.forEach((day, index) => {
+  daysOfWeek.forEach((day) => {
     const dayContainer = document.createElement("div");
     dayContainer.classList.add("day-container");
     dayContainer.innerHTML = `
       <h3>${day}</h3>
-      <div class="class-list" id="classList-${index}"></div>
+      <div class="class-list" id="classList-${day}"></div>
     `;
     calendarContainer.appendChild(dayContainer);
   });
 
-  // Group schedules by day and sort them by time
-  const schedulesByDay = {};
-  daysOfWeek.forEach(day => {
-    schedulesByDay[day] = savedSchedules
-      .filter(schedule => schedule.daysOfWeek.includes(day))
-      .sort((a, b) => {
-        const timeA = new Date(`1970-01-01T${a.startTime}:00`).getTime();
-        const timeB = new Date(`1970-01-01T${b.startTime}:00`).getTime();
-        return timeA - timeB;
-      });
-  });
-
-  // Render schedules for each day
-  Object.entries(schedulesByDay).forEach(([day, schedules]) => {
-    const dayIndex = daysOfWeek.indexOf(day);
-    if (dayIndex !== -1) {
-      const classListContainer = document.getElementById(`classList-${dayIndex}`);
-      schedules.forEach(schedule => {
+  // Populate the calendar with schedules
+  schedules.forEach((schedule) => {
+    schedule.daysOfWeek.forEach((day) => {
+      const classListContainer = document.getElementById(`classList-${day}`);
+      if (classListContainer) {
         const classItem = document.createElement("div");
         classItem.classList.add("class-item");
         classItem.innerHTML = `
@@ -48,7 +32,24 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>${schedule.startTime} - ${schedule.endTime}</p>
         `;
         classListContainer.appendChild(classItem);
-      });
-    }
+      }
+    });
   });
+}
+
+// Display schedules on page load
+displaySchedules();
+
+// Handle "Clear Schedules" button click
+document.getElementById("clearSchedulesButton").addEventListener("click", () => {
+  if (confirm("Are you sure you want to clear all saved schedules?")) {
+    localStorage.removeItem("schedules");
+    alert("All schedules have been cleared.");
+    location.reload(); // Refresh the page to reflect changes
+  }
+});
+
+// Handle "Back to Home" button click
+document.getElementById("backToHomeButton").addEventListener("click", () => {
+  location.href = "index.html"; // Redirect to the home page
 });
